@@ -57,7 +57,7 @@ public class TianGouYunProcessor implements PageProcessor {
         Tiangou tiangou = JSON.parseObject(text, Tiangou.class);
 
         for (int i = 0; i < tiangou.getTngou().size(); i++) {
-            KeyWord keyWord = new KeyWord(tiangou.getTngou().get(i).getTitle());
+            KeyWord keyWord = new KeyWord(tiangou.getTngou().get(i).getKeywords());
             keyWord.setSource("www.tngou.net");
             try {
                 if (keyWordService.insertKeyWord(keyWord)>0){
