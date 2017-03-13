@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bigwis.mapper.KeywordMapper">
+
+    <resultMap id="KeyWordResultMap" type="com.bigwis.model.KeyWord">
+        <result property="keyword" column="keyword"/>
+        <result property="dateTime" column="data_time"/>
+        <result property="source" column="source"/>
+    </resultMap>
+
+    <insert id="insert" parameterType="com.bigwis.model.KeyWord">
+        INSERT INTO lexicon.hot_keyword(
+            keyword,
+            source
+        ) VALUES (
+            #{keyword},
+            #{source}
+        );
+    </insert>
+
+    <select id="getKeyWords" resultMap="KeyWordResultMap">
+        SELECT * FROM lexicon.hot_keyword
+    </select>
+</mapper>

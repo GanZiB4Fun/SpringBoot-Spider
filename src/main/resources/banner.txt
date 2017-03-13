@@ -1,0 +1,11 @@
+${AnsiColor.BRIGHT_GREEN}
+ o    o                               .oPYo.             8  o
+ 8    8                               8    8             8
+o8oooo8 .oPYo. .oPYo. .oPYo. o    o   8      .oPYo. .oPYo8 o8 odYo. .oPYo.
+ 8    8 .oooo8 8    8 8    8 8    8   8      8    8 8    8  8 8' `8 8    8
+ 8    8 8    8 8    8 8    8 8    8   8    8 8    8 8    8  8 8   8 8    8
+ 8    8 `YooP8 8YooP' 8YooP' `YooP8   `YooP' `YooP' `YooP'  8 8   8 `YooP8
+:..:::..:.....:8 ....:8 ....::....8 :::.....::.....::.....::....::..:....8
+${AnsiColor.BRIGHT_RED}
+Application Version: ${application.version}${application.formatted-version}
+Spring Boot Version: ${spring-boot.version}${spring-boot.formatted-version}
