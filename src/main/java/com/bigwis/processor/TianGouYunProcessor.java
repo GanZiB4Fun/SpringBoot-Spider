@@ -7,6 +7,7 @@ import com.bigwis.model.Tiangou;
 import com.bigwis.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2017/3/13.
  */
-//@Service
+@Service
 public class TianGouYunProcessor implements PageProcessor {
     @Autowired
     private KeyWordService keyWordService;
