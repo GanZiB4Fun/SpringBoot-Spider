@@ -1,29 +1,25 @@
 package com.bigwis.processor;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import com.bigwis.constant.WebConstant;
 import com.bigwis.model.KeyWord;
 import com.bigwis.model.Tiangou;
 import com.bigwis.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
 import javax.annotation.PostConstruct;
-import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Administrator on 2017/3/13.
  */
-@Service
+//@Service
 public class TianGouYunProcessor implements PageProcessor {
     @Autowired
     private KeyWordService keyWordService;
@@ -53,7 +49,6 @@ public class TianGouYunProcessor implements PageProcessor {
         int flag = 0;
         //获取数据
         String text = page.getRawText();
-        JSONArray jsonArray = JSONObject.parseObject(text).getJSONArray("tngou");
         Tiangou tiangou = JSON.parseObject(text, Tiangou.class);
 
         for (int i = 0; i < tiangou.getTngou().size(); i++) {

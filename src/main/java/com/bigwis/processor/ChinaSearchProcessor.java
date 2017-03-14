@@ -6,10 +6,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.bigwis.constant.WebConstant;
 import com.bigwis.model.KeyWord;
 import com.bigwis.service.KeyWordService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -24,7 +22,7 @@ import java.util.List;
  * processor()作为页面分析方法
  * Created by Garen on 2017/3/8.
  */
-@Service
+//@Service
 public class ChinaSearchProcessor implements PageProcessor {
 
     @Autowired

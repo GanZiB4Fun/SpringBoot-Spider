@@ -5,6 +5,7 @@ import com.bigwis.model.KeyWord;
 import com.bigwis.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
@@ -72,6 +73,7 @@ public class TouTiaoProcessor implements PageProcessor{
      * 爬虫入口
      */
     @PostConstruct
+    @Scheduled(cron = "0 */1 * * * ? ")
     public void exexute() {
         Spider.create(this)
                 .addUrl("http://m.toutiao.com/search/")
