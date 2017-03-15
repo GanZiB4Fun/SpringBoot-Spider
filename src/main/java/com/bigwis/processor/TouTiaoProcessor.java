@@ -5,15 +5,16 @@ import com.bigwis.model.KeyWord;
 import com.bigwis.service.KeyWordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 今日头条 热门关键词采集
@@ -33,6 +34,24 @@ public class TouTiaoProcessor implements PageProcessor{
             addHeader("accept",WebConstant.HEADER_ACCEPT).
             addHeader("Accept-Language",WebConstant.ACCEPT_LANGUAGE)
             ;
+
+    private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+    /**
+     * 初始化服務調度
+     */
+    public void init() {
+        long delayTime = 5 * 60; // 每5分钟调度一次
+        // 以相对固定时间执行调度（等上一个任务执行完成后，再延迟指定的时间）
+        this.executor.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("头条热搜关键字 - 开始");
+                execute();
+                System.out.println("头条热搜关键字 - 结束");
+            }
+        }, 0, delayTime, TimeUnit.SECONDS);
+    }
 
 
     @Override
@@ -72,9 +91,7 @@ public class TouTiaoProcessor implements PageProcessor{
     /**
      * 爬虫入口
      */
-    @PostConstruct
-    @Scheduled(cron = "0 */1 * * * ? ")
-    public void exexute() {
+    public void execute() {
         Spider.create(this)
                 .addUrl("http://m.toutiao.com/search/")
                 .run();

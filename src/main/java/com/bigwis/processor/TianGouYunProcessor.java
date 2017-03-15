@@ -13,9 +13,11 @@ import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
 import us.codecraft.webmagic.processor.PageProcessor;
 
-import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Administrator on 2017/3/13.
@@ -29,6 +31,25 @@ public class TianGouYunProcessor implements PageProcessor {
             setUserAgent(WebConstant.USER_AGENT).
             addHeader("accept", WebConstant.HEADER_ACCEPT).
             addHeader("Accept-Language", WebConstant.ACCEPT_LANGUAGE).setTimeOut(10000);
+
+    private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+
+    /**
+     * 初始化服務調度
+     */
+    public void init() {
+        long delayTime = 5 * 60; // 每5分钟调度一次
+        // 以相对固定时间执行调度（等上一个任务执行完成后，再延迟指定的时间）
+        this.executor.scheduleWithFixedDelay(new Runnable() {
+            @Override
+            public void run() {
+                System.out.println("天狗热搜关键字采集 - 开始");
+                execute();
+                System.out.println("天狗热搜关键字采集 - 结束");
+            }
+        }, 0, delayTime, TimeUnit.SECONDS);
+    }
+
 
     /**
      * 抽取关键词信息 并保存
@@ -80,8 +101,7 @@ public class TianGouYunProcessor implements PageProcessor {
     /**
      * 爬虫入口
      */
-    @PostConstruct
-    public void exexute(){
+    public void execute() {
         Spider.create(this)
                 .addUrl("http://www.tngou.net/api/top/list?page=1&rows=20")
                 .thread(10)
