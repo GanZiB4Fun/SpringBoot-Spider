@@ -18,7 +18,4 @@
         );
     </insert>
 
-    <select id="getKeyWords" resultMap="KeyWordResultMap">
-        SELECT * FROM lexicon.hot_keyword
-    </select>
 </mapper>
